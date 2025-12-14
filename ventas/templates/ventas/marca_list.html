@@ -5,7 +5,7 @@
 {% block content %}
 <div class="page-header">
     <div>
-        <h1><i class="bi bi-tag-fill" style="color: #7c3aed;"></i> Marcas de Vehículos</h1>
+        <h1><i class="bi bi-tag-fill text-danger"></i> Marcas de Vehículos</h1>
         <p class="text-muted mb-0">Catálogo de marcas disponibles</p>
     </div>
     <a href="{% url 'marca_create' %}" class="btn btn-primary">
@@ -28,16 +28,9 @@
                     <tbody>
                         {% for marca in marcas %}
                         <tr>
-                            <td>
-                                <strong class="text-primary">{{ marca.nombre }}</strong>
-                            </td>
-                            <td>
-                                <i class="bi bi-geo-alt-fill text-info"></i>
-                                {{ marca.pais_origen }}
-                            </td>
-                            <td>
-                                <span class="badge bg-secondary">{{ marca.año_fundacion }}</span>
-                            </td>
+                            <td>{{ marca.nombre }}</td>
+                            <td>{{ marca.pais_origen }}</td>
+                            <td>{{ marca.año_fundacion }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

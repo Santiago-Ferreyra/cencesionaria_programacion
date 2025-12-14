@@ -5,7 +5,7 @@
 {% block content %}
 <div class="page-header">
     <div>
-        <h1><i class="bi bi-cart-check-fill" style="color: #7c3aed;"></i> Ventas Realizadas</h1>
+        <h1><i class="bi bi-cart-check-fill text-danger"></i> Ventas Realizadas</h1>
         <p class="text-muted mb-0">Gestión de todas las ventas registradas</p>
     </div>
     <a href="{% url 'venta_create' %}" class="btn btn-primary">
@@ -32,32 +32,13 @@
                     <tbody>
                         {% for venta in ventas %}
                         <tr>
-                            <td><strong class="text-primary">#{{ venta.id }}</strong></td>
+                            <td>#{{ venta.id }}</td>
                             <td>{{ venta.fecha_venta|date:"d/m/Y" }}</td>
-                            <td>
-                                <i class="bi bi-person-circle text-secondary"></i>
-                                {{ venta.cliente.apellido }}, {{ venta.cliente.nombre }}
-                            </td>
-                            <td>
-                                <i class="bi bi-car-front" style="color: #7c3aed;"></i>
-                                <strong>{{ venta.modelo.marca.nombre }}</strong> {{ venta.modelo.nombre }}
-                            </td>
-                            <td>
-                                <i class="bi bi-person-badge text-info"></i>
-                                {{ venta.vendedor.apellido }}, {{ venta.vendedor.nombre }}
-                            </td>
-                            <td>
-                                <strong class="text-success">${{ venta.precio_final|floatformat:2 }}</strong>
-                            </td>
-                            <td>
-                                {% if venta.metodo_pago == 'contado' %}
-                                    <span class="badge bg-success"><i class="bi bi-cash-coin"></i> {{ venta.get_metodo_pago_display }}</span>
-                                {% elif venta.metodo_pago == 'financiado' %}
-                                    <span class="badge bg-info"><i class="bi bi-credit-card"></i> {{ venta.get_metodo_pago_display }}</span>
-                                {% else %}
-                                    <span class="badge bg-warning"><i class="bi bi-arrow-left-right"></i> {{ venta.get_metodo_pago_display }}</span>
-                                {% endif %}
-                            </td>
+                            <td>{{ venta.cliente.apellido }}, {{ venta.cliente.nombre }}</td>
+                            <td>{{ venta.modelo.marca.nombre }} {{ venta.modelo.nombre }}</td>
+                            <td>{{ venta.vendedor.apellido }}, {{ venta.vendedor.nombre }}</td>
+                            <td>${{ venta.precio_final|floatformat:2 }}</td>
+                            <td>{{ venta.get_metodo_pago_display }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
