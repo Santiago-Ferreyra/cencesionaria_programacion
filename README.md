@@ -65,6 +65,11 @@ Sistema web desarrollado con Django para gestionar una concesionaria de automóv
    - Aplicación web: http://127.0.0.1:8000/
    - Panel de administración: http://127.0.0.1:8000/admin/
 
+## Contra del admin
+
+- usario: admin
+- contra: admin123 
+
 **Nota importante**: Al registrar una venta, el sistema automáticamente descuenta una unidad del stock del modelo vendido.
 
 ## Notas para el Desarrollo
