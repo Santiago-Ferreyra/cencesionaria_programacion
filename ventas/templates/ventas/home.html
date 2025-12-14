@@ -11,14 +11,6 @@
                 <i class="bi bi-car-front-fill"></i> Bienvenido a AutoConcesionaria
             </h1>
             <p class="lead mb-4">Sistema de gestión integral para concesionarias de automóviles</p>
-            <div class="d-flex gap-3 flex-wrap">
-                <a href="{% url 'venta_create' %}" class="btn btn-light btn-lg">
-                    <i class="bi bi-plus-circle-fill"></i> Nueva Venta
-                </a>
-                <a href="{% url 'modelo_list' %}" class="btn btn-outline-light btn-lg">
-                    <i class="bi bi-car-front"></i> Ver Modelos
-                </a>
-            </div>
         </div>
         <div class="col-lg-4 text-center">
             <i class="bi bi-car-front-fill" style="font-size: 8rem; opacity: 0.3;"></i>
@@ -28,7 +20,7 @@
 
 <!-- Estadísticas -->
 <div class="row g-4 mb-5">
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
         <div class="card text-center h-100 border-0 shadow-sm" style="border-top: 4px solid #dc2626 !important;">
             <div class="card-body">
                 <i class="bi bi-tag-fill text-danger" style="font-size: 2.5rem;"></i>
@@ -40,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
         <div class="card text-center h-100 border-0 shadow-sm" style="border-top: 4px solid #f59e0b !important;">
             <div class="card-body">
                 <i class="bi bi-car-front-fill text-warning" style="font-size: 2.5rem;"></i>
@@ -52,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
         <div class="card text-center h-100 border-0 shadow-sm" style="border-top: 4px solid #10b981 !important;">
             <div class="card-body">
                 <i class="bi bi-cart-check-fill text-success" style="font-size: 2.5rem;"></i>
@@ -64,13 +56,25 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-6">
         <div class="card text-center h-100 border-0 shadow-sm" style="border-top: 4px solid #3b82f6 !important;">
             <div class="card-body">
                 <i class="bi bi-people-fill text-primary" style="font-size: 2.5rem;"></i>
                 <h2 class="mt-3 mb-0 fw-bold">{{ total_clientes }}</h2>
                 <p class="text-muted mb-0">Clientes</p>
                 <a href="{% url 'cliente_list' %}" class="btn btn-sm btn-outline-primary mt-3">
+                    Ver todos <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+        <div class="card text-center h-100 border-0 shadow-sm" style="border-top: 4px solid #8b5cf6 !important;">
+            <div class="card-body">
+                <i class="bi bi-person-badge-fill" style="font-size: 2.5rem; color: #8b5cf6;"></i>
+                <h2 class="mt-3 mb-0 fw-bold">{{ total_vendedores }}</h2>
+                <p class="text-muted mb-0">Vendedores</p>
+                <a href="{% url 'vendedor_list' %}" class="btn btn-sm btn-outline-secondary mt-3">
                     Ver todos <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
