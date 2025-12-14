@@ -70,9 +70,10 @@ Sistema web desarrollado con Django para gestionar una concesionaria de automóv
 - usario: admin
 - contra: admin123 
 
-**Nota importante**: Al registrar una venta, el sistema automáticamente descuenta una unidad del stock del modelo vendido.
 
 ## Notas para el Desarrollo
 
 - El proyecto utiliza SQLite como base de datos por defecto
 - Los templates utilizan Bootstrap 5 desde CDN
+
+**Nota importante**: Al registrar una venta, el sistema automáticamente descuenta una unidad del stock del modelo vendido.
