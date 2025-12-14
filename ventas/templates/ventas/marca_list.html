@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Marcas - Concesionaria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1><i class="bi bi-tag-fill text-danger"></i> Marcas de Vehículos</h1>
+        <p class="text-muted mb-0">Catálogo de marcas disponibles</p>
+    </div>
+    <a href="{% url 'marca_create' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle-fill"></i> Nueva Marca
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if marcas %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-tag"></i> Nombre</th>
+                            <th><i class="bi bi-globe"></i> País de Origen</th>
+                            <th><i class="bi bi-calendar"></i> Año de Fundación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for marca in marcas %}
+                        <tr>
+                            <td>
+                                <strong class="text-primary">{{ marca.nombre }}</strong>
+                            </td>
+                            <td>
+                                <i class="bi bi-geo-alt-fill text-info"></i>
+                                {{ marca.pais_origen }}
+                            </td>
+                            <td>
+                                <span class="badge bg-secondary">{{ marca.año_fundacion }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if is_paginated %}
+                <nav aria-label="Paginación" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                    <i class="bi bi-chevron-left"></i> Anterior
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item active">
+                            <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                        </li>
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                    Siguiente <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        {% else %}
+            <div class="empty-state">
+                <i class="bi bi-tag"></i>
+                <h4>No hay marcas registradas</h4>
+                <p class="text-muted">Comienza agregando tu primera marca</p>
+                <a href="{% url 'marca_create' %}" class="btn btn-primary mt-3">
+                    <i class="bi bi-plus-circle-fill"></i> Agregar Primera Marca
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Ventas - Concesionaria{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1><i class="bi bi-cart-check-fill text-danger"></i> Ventas Realizadas</h1>
+        <p class="text-muted mb-0">Gestión de todas las ventas registradas</p>
+    </div>
+    <a href="{% url 'venta_create' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle-fill"></i> Nueva Venta
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if ventas %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-hash"></i> ID</th>
+                            <th><i class="bi bi-calendar-event"></i> Fecha</th>
+                            <th><i class="bi bi-person"></i> Cliente</th>
+                            <th><i class="bi bi-car-front"></i> Modelo</th>
+                            <th><i class="bi bi-person-badge"></i> Vendedor</th>
+                            <th><i class="bi bi-currency-dollar"></i> Precio Final</th>
+                            <th><i class="bi bi-credit-card"></i> Método de Pago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for venta in ventas %}
+                        <tr>
+                            <td><strong class="text-primary">#{{ venta.id }}</strong></td>
+                            <td>{{ venta.fecha_venta|date:"d/m/Y" }}</td>
+                            <td>
+                                <i class="bi bi-person-circle text-secondary"></i>
+                                {{ venta.cliente.apellido }}, {{ venta.cliente.nombre }}
+                            </td>
+                            <td>
+                                <i class="bi bi-car-front text-danger"></i>
+                                <strong>{{ venta.modelo.marca.nombre }}</strong> {{ venta.modelo.nombre }}
+                            </td>
+                            <td>
+                                <i class="bi bi-person-badge text-info"></i>
+                                {{ venta.vendedor.apellido }}, {{ venta.vendedor.nombre }}
+                            </td>
+                            <td>
+                                <strong class="text-success">${{ venta.precio_final|floatformat:2 }}</strong>
+                            </td>
+                            <td>
+                                {% if venta.metodo_pago == 'contado' %}
+                                    <span class="badge bg-success"><i class="bi bi-cash-coin"></i> {{ venta.get_metodo_pago_display }}</span>
+                                {% elif venta.metodo_pago == 'financiado' %}
+                                    <span class="badge bg-info"><i class="bi bi-credit-card"></i> {{ venta.get_metodo_pago_display }}</span>
+                                {% else %}
+                                    <span class="badge bg-warning"><i class="bi bi-arrow-left-right"></i> {{ venta.get_metodo_pago_display }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if is_paginated %}
+                <nav aria-label="Paginación" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                    <i class="bi bi-chevron-left"></i> Anterior
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item active">
+                            <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                        </li>
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                    Siguiente <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        {% else %}
+            <div class="empty-state">
+                <i class="bi bi-cart-x"></i>
+                <h4>No hay ventas registradas</h4>
+                <p class="text-muted">Comienza registrando tu primera venta</p>
+                <a href="{% url 'venta_create' %}" class="btn btn-primary mt-3">
+                    <i class="bi bi-plus-circle-fill"></i> Registrar Primera Venta
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
